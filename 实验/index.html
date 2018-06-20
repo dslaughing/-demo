@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>实验</title>
+	</head>
+	<style>
+		body{
+			min-width:1200px;
+		}
+		
+		.container{
+			position:relative;
+			width:1000px;
+			height:700px;
+			border:1px solid black;
+			box-sizing: border-box;
+			left:calc(50% - 500px);
+			top:calc(50% - 350px);
+		}
+		.plus{
+			display:none;
+			width:100px;
+			line-height:100px;
+			border:1px solid red;
+			text-align: center;
+			position: absolute;
+			left:calc(50% - 50px);
+			top:calc(50% - 50px);
+			font-size: 80px;
+			box-sizing: border-box;
+			cursor:default;
+		}
+		.dot{
+			position: absolute;
+			left:0px;
+			top:0px;
+			width:30px;
+			height:30px;
+			background: black;
+			border-radius: 50%;
+			display:none;
+		}
+		.instruction{
+			text-align:center ;
+			font-size:40px;
+			line-height:700px;
+			margin:0;
+			display:none;
+			cursor:default;
+		}
+		.toshow{
+			display:block;
+		}
+		.tohide{
+			display:none;
+		}
+		
+	</style>
+	<body>
+		<div class="container">
+			<div class="dot"></div>
+			<div class="plus toshow">&#43;</div>
+			<p class="instruction">变态心理学都唔知点挂(点击继续实验)</p>
+		</div>
+		<p id="result">
+			
+		</p>
+		<script>
+			
+			$=function(id){return document.querySelector(id)};
+			var time1,time2,arr=[],dis;
+	
+			function reset(){
+				var leftPos=Math.floor(Math.random()*970);
+				var topPos=Math.floor(Math.random()*670);
+				console.log(leftPos);
+				console.log(topPos);
+				if((leftPos>=400 && leftPos<=575)&&(topPos>=250 && topPos<=425)){
+					console.log(true);
+					reset();
+				}
+				else{
+					$(".dot").style.left=leftPos+"px";
+					$(".dot").style.top=topPos+"px";
+				}
+			}
+	
+			
+			$(".plus").addEventListener("click",function(){
+				$(".plus").classList.remove("toshow");
+				reset();
+				setTimeout(function(){
+				$(".dot").classList.add("toshow");
+				time1=new Date().getTime();
+				},500)
+
+			},false);
+			
+			$(".dot").addEventListener("click",function(){
+				$(".plus").classList.add("toshow");
+				$(".dot").classList.remove("toshow");
+				time2=new Date().getTime();
+				dis=((time2-time1)/1000).toFixed(4);
+				arr.push(dis);
+				console.log(arr);
+				if(arr.length==5){
+					$(".instruction").classList.add("toshow");
+					$(".plus").classList.remove("toshow");
+				}
+				if(arr.length==10){
+					var half=((arr.length/2))
+					var firstPart=arr.slice(0,half).join("</br>");
+					var nextPart=arr.slice(half).join("</br>");
+					$("#result").innerHTML="第一部分实验数据为:</br>"+firstPart+"</br></br>  第二部分实验数据为:</br>"+nextPart;
+					window.location.href="#result";
+				}
+				
+			},false);			
+			
+			$(".instruction").addEventListener("click",function(){
+				$(".instruction").classList.remove("toshow");
+				$(".plus").classList.add("toshow");
+			})
+			
+		</script>
+		
+	</body>
+</html>
