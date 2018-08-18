@@ -66,7 +66,7 @@
 		<div class="container">
 			<div class="dot"></div>
 			<div class="plus toshow">&#43;</div>
-			<p class="instruction">变态心理学都唔知点挂(点击继续实验)</p>
+			<p class="instruction">点击继续实验</p>
 		</div>
 		<p id="result">
 			
@@ -109,11 +109,11 @@
 				dis=((time2-time1)/1000).toFixed(4);
 				arr.push(dis);
 				console.log(arr);
-				if(arr.length==2){
+				if(arr.length==5){
 					$(".instruction").classList.add("toshow");
 					$(".plus").classList.remove("toshow");
 				}
-				if(arr.length==4){
+				if(arr.length==10){
 					var half=((arr.length/2))
 					var firstPart=arr.slice(0,half).join("</br>");
 					var nextPart=arr.slice(half).join("</br>");
